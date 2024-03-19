@@ -42,6 +42,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fake Walls
+    uniqueID: 3041314565
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
 
+    bool atHospital = false;
     private void Start()
     {
         damageTimer = damageTimerStart;
@@ -99,13 +100,19 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         if (other.transform.tag == "MovingPlatform") {
             transform.parent = other.transform;
+            atHospital = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D other) {
         if (other.transform.tag == "MovingPlatform") {
             transform.parent = null;
+            atHospital = false;
         }
+    }
+
+    public bool GetCollisions() {
+        return atHospital;
     }
 
 }
