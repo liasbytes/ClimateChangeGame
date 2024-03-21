@@ -10900,7 +10900,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 726457048}
   - {fileID: 897563455}
   m_Father: {fileID: 1578439521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44488,8 +44487,6 @@ SceneRoots:
   - {fileID: 114516580}
   - {fileID: 527166471}
   - {fileID: 747173894}
-  - {fileID: 4141122539100118284}
   - {fileID: 400525447}
-  - {fileID: 1170788304}
   - {fileID: 134913608}
   - {fileID: 585997979}
