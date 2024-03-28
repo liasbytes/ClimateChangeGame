@@ -29,8 +29,11 @@ public class BasicPlayerController : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
+            anim.SetTrigger("takeoff");
             jump = true;
         }
+        
+        
     }
 
     void FixedUpdate()
@@ -38,15 +41,8 @@ public class BasicPlayerController : MonoBehaviour
         controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
         jump = false;
 
-
-        if (moveInput == 0)
-        {
-            anim.SetBool("isRunning", false);
-        } 
-        else {
-            anim.SetBool("isRunning", true);
-        }
-
+        anim.SetBool("isRunning", (moveInput != 0));
+        anim.SetBool("isJumping", !controller.GetGrounded());
     }
 
     void Die()
