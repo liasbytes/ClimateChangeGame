@@ -12,12 +12,14 @@ public class DataManager : MonoBehaviour
 
     public void writeSaveData()
     {
+        Debug.Log("Test");
         SaveData data = new SaveData();
         data.health = playerData.health;
         data.cpNum = playerData.cpNum;
         data.checkpointLocation = playerData.respawnLocation;
         data.inventory = inventoryData.inventory;
         string JSONData = JsonUtility.ToJson(data);
+        Debug.Log(JSONData);
         var fullPath = Path.Combine(Application.persistentDataPath, "ClimateChangeSaveData.json");
         try
         {
@@ -41,7 +43,9 @@ public class DataManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError($"Failed to read from {fullPath} with exception {e}");
+            return;
         }
+        Debug.Log(JSONData);
         SaveData data = JsonUtility.FromJson<SaveData>(JSONData);
         playerData.health = data.health;
         playerData.cpNum = data.cpNum;
