@@ -29,7 +29,9 @@ public class BasicPlayerController : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-            anim.SetTrigger("takeoff");
+            if (controller.GetGrounded()) {
+                anim.SetTrigger("takeoff");
+            }
             jump = true;
         }
         
