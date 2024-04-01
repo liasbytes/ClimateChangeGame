@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
 {
     public void StartLevel()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("CityLevel"); // eventually should load to specified checkpoint
     }
 

@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cab12748abbce54e89274c9bbd3ee45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 350
+  m_JumpForce: 250
   m_MovementSmoothing: 0.07
   m_WhatIsGround:
     serializedVersion: 2
