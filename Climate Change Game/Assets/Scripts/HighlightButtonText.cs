@@ -4,10 +4,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+// from https://discussions.unity.com/t/how-to-change-text-color-on-hover-in-new-gui/135257/9
+
 [RequireComponent( typeof( Button ) )]
 public class FullyReactiveButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    private TextMeshProUGUI txt;
+    private TextMeshProUGUI txt; 
     private Button btn;
 
     private Color normalColor;

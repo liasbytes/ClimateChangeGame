@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 40f;
 
     public float startHealth;
-    private float health;
+    public float health;
     public float damageTimerStart = 0.4f;
     
     private float damageTimer;
