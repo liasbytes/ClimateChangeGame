@@ -12,18 +12,16 @@ public class DataManager : MonoBehaviour
 
     public void writeSaveData()
     {
-        Debug.Log("Test");
         SaveData data = new SaveData();
         data.health = playerData.health;
         data.cpNum = playerData.cpNum;
-        data.checkpointLocation = playerData.respawnLocation;
+        data.checkpointLocation = playerData.respawnLocation.position;
         data.inventory = inventoryData.inventory;
         string JSONData = JsonUtility.ToJson(data);
-        Debug.Log(JSONData);
         var fullPath = Path.Combine(Application.persistentDataPath, "ClimateChangeSaveData.json");
         try
         {
-            File.WriteAllText(JSONData, fullPath);
+            File.WriteAllText(fullPath, JSONData);
         }
         catch (Exception e)
         {
@@ -45,14 +43,12 @@ public class DataManager : MonoBehaviour
             Debug.LogError($"Failed to read from {fullPath} with exception {e}");
             return;
         }
-        Debug.Log(JSONData);
         SaveData data = JsonUtility.FromJson<SaveData>(JSONData);
         playerData.health = data.health;
         playerData.cpNum = data.cpNum;
-        playerData.respawnLocation = data.checkpointLocation;
-        playerData.transform.position = data.checkpointLocation.position;
+        playerData.respawnLocation.position = data.checkpointLocation;
+        playerData.transform.position = data.checkpointLocation;
         inventoryData.inventory = data.inventory;
-
     }
 
 }
