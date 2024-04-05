@@ -137,7 +137,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+        if (!isDead)
+        {
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
+        }
         jump = false;
 
     }
@@ -146,6 +149,7 @@ public class PlayerController : MonoBehaviour
     {
         health = startHealth;
         isDead = true;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
