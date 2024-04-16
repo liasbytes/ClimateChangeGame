@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerWater : MonoBehaviour
 {
 
-    public CharacterController2D controller;
+    public CharacterController2DWater controller;
     public float runSpeed = 40f;
 
     public float startHealth;
-    public float health;
+    private float health;
     public float damageTimerStart = 0.4f;
     
     private float damageTimer;
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private float deathTimer;
 
     float horizontalMove = 0f;
+    float verticalMove = 0f;
     bool jump = false;
 
     bool atHospital = false;
@@ -128,19 +129,14 @@ public class PlayerController : MonoBehaviour
 
             horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
-            if (Input.GetButtonDown("Jump"))
-            {
-                jump = true;
-            }
+            verticalMove = Input.GetAxisRaw("Vertical") * runSpeed;
+            if (verticalMove < 0) verticalMove = 0;
         }
     }
 
     void FixedUpdate()
     {
-        if (!isDead)
-        {
-            controller.Move(horizontalMove * Time.fixedDeltaTime, jump);
-        }
+        controller.Move(horizontalMove*Time.fixedDeltaTime,verticalMove*Time.fixedDeltaTime);
         jump = false;
 
     }
@@ -149,7 +145,6 @@ public class PlayerController : MonoBehaviour
     {
         health = startHealth;
         isDead = true;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
     }
 
     void OnCollisionEnter2D(Collision2D other) {

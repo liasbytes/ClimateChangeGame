@@ -6,7 +6,7 @@ public class SaveData
 {
     public float health;
     public int cpNum;
-    public Transform checkpointLocation;
+    public Vector3 checkpointLocation;
     public List<ItemData> inventory;
 
 }
