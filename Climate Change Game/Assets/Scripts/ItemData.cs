@@ -6,5 +6,12 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     public string name;
+    public string description;
+    public string levelLocation;
     public Sprite sprite;
+    public bool found = false;
+
+    public void setFound() {
+        found = true;
+    }
 }

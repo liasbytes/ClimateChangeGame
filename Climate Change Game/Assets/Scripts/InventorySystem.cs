@@ -5,11 +5,14 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
     public List<ItemData> inventory;
+    //public List<ItemData> permanentInventory;
 
     // Update is called once per frame
     public void AddToInventory(ItemData data)
     {
         inventory.Add(data);
+        data.setFound();
+        //permanentInventory.Add(data);
     }
 
     public bool UseItem(ItemData data) 
@@ -22,5 +25,9 @@ public class InventorySystem : MonoBehaviour
         {
             return false;
         }        
+    }
+
+    public void ClearInventory() {
+        inventory.Clear();
     }
 }
