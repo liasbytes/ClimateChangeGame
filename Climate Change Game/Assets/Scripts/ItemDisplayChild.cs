@@ -11,7 +11,6 @@ public class ItemDisplayChild : MonoBehaviour
     {
         Image img = gameObject.GetComponent<Image>();
         img.sprite = item.sprite;
-        Debug.Log("started");
     }
 
     // Update is called once per frame

@@ -10,7 +10,7 @@ public class MenuCameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(13, 8, 5);
+        transform.position = new Vector3(13, 8, -10);
         targetpos = transform.position;
     }
 
@@ -32,6 +32,11 @@ public class MenuCameraFollow : MonoBehaviour
 
     public void openLoads()
     {
-        // for downwards moving load game click
+        targetpos = transform.position + new Vector3(0,-13,0);
+    }
+
+    public void closeLoads()
+    {
+        targetpos = transform.position + new Vector3(0,13,0);
     }
 }
