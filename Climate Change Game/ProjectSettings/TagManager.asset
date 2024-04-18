@@ -12,7 +12,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Player
@@ -41,11 +41,34 @@ TagManager:
   - 
   - 
   - 
-  - 
   m_SortingLayers:
-  - name: Fake Walls
-    uniqueID: 3041314565
+  - name: Background 2
+    uniqueID: 4232411337
+    locked: 0
+  - name: Background 1
+    uniqueID: 4193284457
+    locked: 0
+  - name: Fog Back
+    uniqueID: 3737890941
+    locked: 0
+  - name: Player
+    uniqueID: 4151006333
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fog Front
+    uniqueID: 841163147
+    locked: 0
+  - name: Ground
+    uniqueID: 1264368721
+    locked: 0
+  - name: Foreground 1
+    uniqueID: 3847505853
+    locked: 0
+  - name: Foreground 2
+    uniqueID: 2023360739
+    locked: 0
+  - name: Fake Walls
+    uniqueID: 3041314565
     locked: 0
