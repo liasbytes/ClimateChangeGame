@@ -5,12 +5,13 @@ using UnityEngine;
 public class MenuCameraFollow : MonoBehaviour
 {
     public Vector3 targetpos;
-    public float speed = 40;
+    public float speed = 50;
     private Vector3 velocity = Vector3.zero;
+    private Vector3 homepos = new Vector3(13, 8, -10);
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = new Vector3(13, 8, -10);
+        transform.position = homepos;
         targetpos = transform.position;
     }
 
@@ -22,21 +23,28 @@ public class MenuCameraFollow : MonoBehaviour
 
     public void openExtras() 
     {
-        targetpos = transform.position + new Vector3(26,0,0);
+        StartCoroutine(waiter(new Vector3(18,0,0)));
     }
 
     public void closeExtras() 
     {
-        targetpos = transform.position + new Vector3(-26,0,0);
+        StartCoroutine(waiter(new Vector3(0,0,0)));
     }
 
     public void openLoads()
     {
-        targetpos = transform.position + new Vector3(0,-13,0);
+        StartCoroutine(waiter(new Vector3(0,-13,0)));
+        //targetpos = transform.position + new Vector3(0,-13,0);
+        
     }
 
     public void closeLoads()
     {
-        targetpos = transform.position + new Vector3(0,13,0);
+        StartCoroutine(waiter(new Vector3(0,0,0)));
+    }
+
+    IEnumerator waiter(Vector3 displacement) {
+        yield return new WaitForSeconds((float)0.1);
+        targetpos = homepos + displacement;
     }
 }

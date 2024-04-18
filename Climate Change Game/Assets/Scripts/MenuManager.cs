@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    void Start()
+    {
+        Time.timeScale = 1f;
+    }
     public void StartLevel()
     {
         Time.timeScale = 1f;
