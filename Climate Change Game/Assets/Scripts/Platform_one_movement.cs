@@ -7,8 +7,7 @@ public class Platform_one_movement : MonoBehaviour
 {
     [SerializeField]
     private Vector3[] waypoints;
-    [SerializeField]
-    private float movementSpeed;
+    public float movementSpeed;
     private int currentTargetIndex = 0;
     private float distance;
     
