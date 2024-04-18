@@ -192,7 +192,9 @@ MonoBehaviour:
   waypoints:
   - {x: -3.83, y: -0.53, z: 0}
   - {x: -0.65, y: -0.53, z: 0}
+  playerPosition: {fileID: 0}
   movementSpeed: 2
+  thresholdDistance: 5
 --- !u!61 &7781599266751696002
 BoxCollider2D:
   m_ObjectHideFlags: 0

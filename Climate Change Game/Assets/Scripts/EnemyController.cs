@@ -21,8 +21,12 @@ public class EnemyController : MonoBehaviour
     public bool moving;
     [SerializeField]
     private Vector3[] waypoints;
+    public Vector3 closestWaypoint;
+    [SerializeField]
+    public Transform playerPosition;
     [SerializeField]
     private float movementSpeed;
+    public float thresholdDistance;
     private int currentTargetIndex = 0;
     private float distance;
 
@@ -34,23 +38,52 @@ public class EnemyController : MonoBehaviour
         finalColor = initialColor;
         finalColor.a = 1.0f / 3;
         health = maxHealth;
+        closestWaypoint = Vector3.positiveInfinity;
     }
 
     void Update()
     {
         if (moving)
         {
-            distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
-
-            if (distance < 0.1)
+            /*if (Vector3.Distance(transform.position, playerPosition.position) <= thresholdDistance)
             {
-                currentTargetIndex++;
-                currentTargetIndex = currentTargetIndex % waypoints.Length;
+                if (closestWaypoint == Vector3.positiveInfinity)
+                {
+                    for (int i = 0; i <waypoints.Length; i++)
+                    {
+                        if (Vector3.Distance(waypoints[i], playerPosition.position) <= Vector3.Distance(closestWaypoint, playerPosition.position))
+                        {
+                            closestWaypoint = waypoints[i];
+                            currentTargetIndex = i;
+                        }
+                    }
+                }
+                distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
+
+                if (distance < 0.1)
+                {
+                    closestWaypoint = Vector3.positiveInfinity;
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
+                }
             }
             else
-            {
-                transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
-            }
+            {*/
+                closestWaypoint = Vector3.positiveInfinity;
+                distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
+
+                if (distance < 0.1)
+                {
+                    currentTargetIndex++;
+                    currentTargetIndex = currentTargetIndex % waypoints.Length;
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
+                }
+            //}
         }
 
         if (isDamaged)
