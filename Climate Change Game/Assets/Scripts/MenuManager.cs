@@ -8,14 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public FadeUI blackScreen;
     void Start()
     {
         Time.timeScale = 1f;
     }
     public void StartLevel()
     {
+        StartCoroutine(fadeAndLoad());
         Time.timeScale = 1f;
-        SceneManager.LoadScene("CityLevel"); // eventually should load to specified checkpoint
+    }
+
+    public void LoadLevel()
+    {
+        // add code?
     }
 
     public void QuitGame()
@@ -24,6 +30,12 @@ public class MenuManager : MonoBehaviour
         #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
         #endif
+    }
+
+    IEnumerator fadeAndLoad() {
+        blackScreen.FadeIn();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("CityLevel"); // from load game page: should load to specified checkpoint
     }
 
 }

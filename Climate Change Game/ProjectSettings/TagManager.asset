@@ -8,6 +8,7 @@ TagManager:
   - MovingPlatform2
   - MovingPlatform3
   - MovingPlatform
+  - blackscreen
   layers:
   - Default
   - TransparentFX
