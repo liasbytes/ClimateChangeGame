@@ -10,9 +10,9 @@ public class ChangeSettings : MonoBehaviour
     public Toggle FullScreenToggle, VSyncToggle;
     public List<ResItem> resolutions = new List<ResItem>();
     private int SelectedResolution;
-    public TMP_Text resolutionLabel, masterLabel, musicLabel, sfxLabel;
+    public TMP_Text resolutionLabel, masterLabel, musicLabel, sfxLabel, ambientLabel;
     public AudioMixer mixer;
-    public Slider masterSlider, musicSlider, sfxSlider;
+    public Slider masterSlider, musicSlider, sfxSlider, ambientSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +34,13 @@ public class ChangeSettings : MonoBehaviour
         musicSlider.value = Mathf.RoundToInt(volume * 2) + 100;
         mixer.GetFloat("SFXVol", out volume);
         sfxSlider.value = Mathf.RoundToInt(volume * 2) + 100;
+        mixer.GetFloat("AmbientVol", out volume);
+        ambientSlider.value = Mathf.RoundToInt(volume * 2) + 100;
 
         masterLabel.text = masterSlider.value.ToString();
         musicLabel.text = musicSlider.value.ToString();
         sfxLabel.text = sfxSlider.value.ToString();
+        ambientLabel.text = ambientSlider.value.ToString();
     }
 
     // Update is called once per frame
@@ -103,6 +106,13 @@ public class ChangeSettings : MonoBehaviour
         sfxLabel.text = sfxSlider.value.ToString();
         mixer.SetFloat("SFXVol", (float)0.5*(sfxSlider.value-100));
         PlayerPrefs.SetFloat("SFXVol", (float)0.5*(sfxSlider.value-100));
+    }
+
+    public void SetAmbientVolume()
+    {
+        ambientLabel.text = ambientSlider.value.ToString();
+        mixer.SetFloat("AmbientVol", (float)0.5*(ambientSlider.value-100));
+        PlayerPrefs.SetFloat("AmbientVol", (float)0.5*(ambientSlider.value-100));
     }
 }
 
