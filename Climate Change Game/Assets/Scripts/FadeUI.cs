@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class FadeUI : MonoBehaviour
 {
     private CanvasGroup UIgroup;
-    private int fadeInSpeed = 2;
+    private int fadeInSpeed = 3;
     private int fadeOutSpeed = 5;
     private bool fadeIn = false;
     private bool fadeOut = false;

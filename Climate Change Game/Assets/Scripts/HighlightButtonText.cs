@@ -23,7 +23,7 @@ public class FullyReactiveButton : MonoBehaviour, IPointerEnterHandler, IPointer
         btn = gameObject.GetComponent<Button>();
         normalColor = new Color(221/255f,221/255f,221/255f);
         disabledColor = new Color(1f,0f,0f);
-        pressedColor = new Color(1f,1f,1f);
+        pressedColor = new Color(221/255f,221/255f,221/255f);
         highlightedColor = new Color(1f,1f,1f);
     }
 
