@@ -16,4 +16,4 @@ MonoBehaviour:
   description: This is an apple.
   levelLocation: City
   sprite: {fileID: 7293598183456022363, guid: 1ddc9afd21fec77489b1248d18f31b68, type: 3}
-  found: 1
+  found: 0
