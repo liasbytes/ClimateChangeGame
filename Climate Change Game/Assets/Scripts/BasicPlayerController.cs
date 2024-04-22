@@ -6,7 +6,7 @@ using UnityEngine;
 public class BasicPlayerController : MonoBehaviour
 {
 
-    public CharacterController2D controller;
+    private CharacterController2D controller;
     private Animator anim;
     public float runSpeed = 40f;
 
@@ -19,6 +19,7 @@ public class BasicPlayerController : MonoBehaviour
     void Start() 
     {
         anim = GetComponent<Animator>();
+        controller = GetComponent<CharacterController2D>();
     }
 
     void Update()

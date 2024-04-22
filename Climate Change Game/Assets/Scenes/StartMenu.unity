@@ -470,6 +470,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 686519134}
+        m_TargetAssemblyTypeName: MenuPlayerController, Assembly-CSharp
+        m_MethodName: MoveRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &173062051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6839,6 +6851,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 686519134}
+        m_TargetAssemblyTypeName: MenuPlayerController, Assembly-CSharp
+        m_MethodName: MoveLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &454594096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8012,6 +8036,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5ea5bc5e6c5b44bb2c0afe7d13d76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &501612963 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7984113365572806383, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+  m_PrefabInstance: {fileID: 762451506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &601749632
 GameObject:
   m_ObjectHideFlags: 0
@@ -8456,6 +8485,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9080766586656210572, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
   m_PrefabInstance: {fileID: 762451506}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &686519134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501612963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad5344e8e827cc438e48714ddb604b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runSpeed: 33
 --- !u!1 &693199361
 GameObject:
   m_ObjectHideFlags: 0
@@ -9148,12 +9190,16 @@ PrefabInstance:
       value: -168.998
       objectReference: {fileID: 0}
     - target: {fileID: 9080766586656210572, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9080766586656210572, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalPosition.x
       value: -452.60712
       objectReference: {fileID: 0}
     - target: {fileID: 9080766586656210572, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -241.011
+      value: -241.07
       objectReference: {fileID: 0}
     - target: {fileID: 9080766586656210572, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9187,10 +9233,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 756902166631103715, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7984113365572806383, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 686519134}
   m_SourcePrefab: {fileID: 100100000, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
 --- !u!1 &779445796
 GameObject:
