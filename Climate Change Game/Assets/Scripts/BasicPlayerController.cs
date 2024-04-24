@@ -36,7 +36,6 @@ public class BasicPlayerController : MonoBehaviour
             jump = true;
         }
         
-        
     }
 
     void FixedUpdate()
@@ -64,5 +63,4 @@ public class BasicPlayerController : MonoBehaviour
             transform.parent = null;
         }
     }
-
 }
