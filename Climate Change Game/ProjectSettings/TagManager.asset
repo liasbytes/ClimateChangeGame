@@ -43,10 +43,7 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background 2
-    uniqueID: 4232411337
-    locked: 0
-  - name: Background 1
+  - name: Background
     uniqueID: 4193284457
     locked: 0
   - name: Fog Back
@@ -64,11 +61,8 @@ TagManager:
   - name: Ground
     uniqueID: 1264368721
     locked: 0
-  - name: Foreground 1
+  - name: Foreground
     uniqueID: 3847505853
-    locked: 0
-  - name: Foreground 2
-    uniqueID: 2023360739
     locked: 0
   - name: Fake Walls
     uniqueID: 3041314565
