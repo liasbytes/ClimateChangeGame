@@ -13692,6 +13692,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 5155239365183965358, guid: 0d6de9bfbd5f3c545ae4c313b0cadce7, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6485635741520754380, guid: 0d6de9bfbd5f3c545ae4c313b0cadce7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

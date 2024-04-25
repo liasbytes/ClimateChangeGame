@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseOptions : MonoBehaviour
 {
+    public FadeUI blackScreen;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+
+    void Start()
+    {   
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.DelayedFadeOut((float)0.2);
+    }
 
     // Update is called once per frame
     void Update()
@@ -37,13 +45,14 @@ public class PauseOptions : MonoBehaviour
         GameIsPaused = true;
     }
 
-    public void OpenSettingsMenu()
-    {
-        Debug.Log("open settings...");
-    }
-
     public void QuitToHome()
     {
+        StartCoroutine(LoadMenu());
+    }
+
+    IEnumerator LoadMenu() {
+        blackScreen.FadeIn();
+        yield return new WaitForSecondsRealtime((float)0.4);
         SceneManager.LoadScene("StartMenu");
     }
 }

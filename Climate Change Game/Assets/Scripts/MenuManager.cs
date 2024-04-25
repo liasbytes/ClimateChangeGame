@@ -11,6 +11,8 @@ public class MenuManager : MonoBehaviour
     public FadeUI blackScreen;
     void Start()
     {
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.DelayedFadeOut((float)0.1);
         Time.timeScale = 1f;
     }
     public void StartLevel()

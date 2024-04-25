@@ -22,7 +22,7 @@ public class FadeUI : MonoBehaviour
     void Update() {
         if (fadeIn) {
             if (UIgroup.alpha < 1) {
-                UIgroup.alpha += fadeInSpeed*Time.deltaTime;
+                UIgroup.alpha += fadeInSpeed*Time.unscaledDeltaTime;
                 if (UIgroup.alpha >= 1) {
                     fadeIn = false;
                 }
@@ -31,7 +31,7 @@ public class FadeUI : MonoBehaviour
 
         if (fadeOut) {
             if (UIgroup.alpha >= 0) {
-                UIgroup.alpha -= fadeOutSpeed*Time.deltaTime;
+                UIgroup.alpha -= fadeOutSpeed*Time.unscaledDeltaTime;
                 if (UIgroup.alpha <= 0) {
                     fadeOut = false;
                     gameObject.SetActive(false);
