@@ -8321,7 +8321,7 @@ PrefabInstance:
       objectReference: {fileID: 737869462}
     - target: {fileID: 7336585313421947582, guid: 66496c75e342e5849919d0692b9f188d, type: 3}
       propertyPath: thresholdDistance
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7336585313421947582, guid: 66496c75e342e5849919d0692b9f188d, type: 3}
       propertyPath: waypoints.Array.size

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,14 +22,17 @@ public class EnemyController : MonoBehaviour
     public bool moving;
     [SerializeField]
     private Vector3[] waypoints;
+    public Vector3 closestPlayerWaypoint;
     public Vector3 closestWaypoint;
+    private int closestWaypointIndex;
     [SerializeField]
     public Transform playerPosition;
     [SerializeField]
     private float movementSpeed;
     public float thresholdDistance;
-    private int currentTargetIndex = 0;
-    private float distance;
+    public int currentTargetIndex = 0;
+    private int moveDirection = 1;
+    public float distance;
 
     private void Start()
     {
@@ -38,6 +42,7 @@ public class EnemyController : MonoBehaviour
         finalColor = initialColor;
         finalColor.a = 1.0f / 3;
         health = maxHealth;
+        closestPlayerWaypoint = Vector3.positiveInfinity;
         closestWaypoint = Vector3.positiveInfinity;
     }
 
@@ -45,23 +50,56 @@ public class EnemyController : MonoBehaviour
     {
         if (moving)
         {
-            /*if (Vector3.Distance(transform.position, playerPosition.position) <= thresholdDistance)
+            if (Vector3.Distance(transform.position, playerPosition.position) <= thresholdDistance)
             {
-                if (closestWaypoint == Vector3.positiveInfinity)
+                if (float.IsPositiveInfinity(Vector3.Distance(transform.position, closestPlayerWaypoint)))
                 {
-                    for (int i = 0; i <waypoints.Length; i++)
+                    for (int i = 0; i < waypoints.Length; i++)
                     {
-                        if (Vector3.Distance(waypoints[i], playerPosition.position) <= Vector3.Distance(closestWaypoint, playerPosition.position))
+                        if (Vector3.Distance(waypoints[i], playerPosition.position) < Vector3.Distance(closestPlayerWaypoint, playerPosition.position))
                         {
-                            closestWaypoint = waypoints[i];
-                            currentTargetIndex = i;
+                            closestPlayerWaypoint = waypoints[i];
+                            closestWaypointIndex = i;
+                        }
+                        /*if (Vector3.Distance(waypoints[i],transform.position) > 0.1f)
+                        {
+                            
+                            float angleCurrent = Vector3.Angle(playerPosition.position - transform.position, closestWaypoint - transform.position);
+                            float angleNew = Vector3.Angle(playerPosition.position - transform.position, waypoints[i] - transform.position);
+                            float weightedDistanceCurrent =  Vector3.Distance(closestWaypoint, transform.position)/ Mathf.Cos(angleCurrent);
+                            float weightedDistanceNew =  Vector3.Distance(waypoints[i], transform.position)/ Mathf.Cos(angleNew);
+                            if (weightedDistanceNew >= 0 && weightedDistanceNew < weightedDistanceCurrent)
+                            {
+                                closestWaypoint = waypoints[i];
+                                currentTargetIndex = i;
+                            }
+                        }*/
+                    }
+                    int newTargetIndex = closestWaypointIndex;
+                    if (closestWaypointIndex != currentTargetIndex)
+                    {
+                        for (int i = 0; i < waypoints.Length; i++)
+                        {
+                            if (i != currentTargetIndex)
+                            {
+                                if (Mathf.Sign(currentTargetIndex - i) == Mathf.Sign(closestWaypointIndex - i))
+                                {
+                                    if (Vector3.Distance(waypoints[i], transform.position) < Vector3.Distance(closestWaypoint, transform.position))
+                                    {
+                                        closestWaypoint = waypoints[i];
+                                        newTargetIndex = i;
+                                    }
+                                }
+                            }
                         }
                     }
+                    currentTargetIndex = newTargetIndex;
                 }
-                distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
+                distance = Vector3.Distance(transform.position, closestWaypoint);
 
                 if (distance < 0.1)
                 {
+                    closestPlayerWaypoint = Vector3.positiveInfinity;
                     closestWaypoint = Vector3.positiveInfinity;
                 }
                 else
@@ -70,20 +108,28 @@ public class EnemyController : MonoBehaviour
                 }
             }
             else
-            {*/
+            {
+                closestPlayerWaypoint = Vector3.positiveInfinity;
                 closestWaypoint = Vector3.positiveInfinity;
                 distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
 
                 if (distance < 0.1)
                 {
-                    currentTargetIndex++;
+                    if (moveDirection == 1 && currentTargetIndex + 1 == waypoints.Length)
+                    {
+                        moveDirection = -1;
+                    } else if (moveDirection == -1 && currentTargetIndex == 0)
+                    {
+                        moveDirection = 1;
+                    }
+                    currentTargetIndex += moveDirection;
                     currentTargetIndex = currentTargetIndex % waypoints.Length;
                 }
                 else
                 {
                     transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
                 }
-            //}
+            }
         }
 
         if (isDamaged)
