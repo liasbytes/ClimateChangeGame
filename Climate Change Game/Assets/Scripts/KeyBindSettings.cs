@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 // from tutorial: https://youtu.be/MEHe0Uf3m4I?si=MicKS0-i-20-7Wf4
 
@@ -14,6 +15,8 @@ public class KeyBindSettings : MonoBehaviour
 
     private Color32 normal = new Color32(94,94,94,255);
     private Color32 selected = new Color32(239,116,40,255);
+
+    public InputActionAsset actions;
 
     // Start is called before the first frame update
     void Start()
@@ -63,9 +66,7 @@ public class KeyBindSettings : MonoBehaviour
 
     public void SaveKeys()
     {
-        foreach (var key in keyDict) {
-            PlayerPrefs.SetString(key.Key, key.Value.ToString());
-
-        }
+        var rebinds = actions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebinds", rebinds);
     }
 }

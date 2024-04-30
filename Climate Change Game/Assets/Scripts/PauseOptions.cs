@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseOptions : MonoBehaviour
 {
@@ -10,16 +11,19 @@ public class PauseOptions : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
+    private InputAction escape;
+
     void Start()
     {   
         blackScreen.gameObject.SetActive(true);
         blackScreen.DelayedFadeOut((float)0.2);
+        escape = InputSystem.actions.FindAction("Pause");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (escape.IsPressed())
         {
             if (GameIsPaused)
             {

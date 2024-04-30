@@ -105,7 +105,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
-      "version": "2.9.7",
+      "version": "2.10.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -153,7 +153,7 @@
       }
     },
     "com.unity.ide.rider": {
-      "version": "3.0.27",
+      "version": "3.0.28",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -169,6 +169,14 @@
         "com.unity.test-framework": "1.1.9"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "file:C:/Users/zshep/Downloads/InputSystem-1.8.1/InputSystem-1.8.1/Packages/com.unity.inputsystem",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      }
     },
     "com.unity.mathematics": {
       "version": "1.2.6",
@@ -198,7 +206,7 @@
       }
     },
     "com.unity.render-pipelines.universal": {
-      "version": "14.0.10",
+      "version": "14.0.11",
       "depth": 0,
       "source": "builtin",
       "dependencies": {
@@ -275,7 +283,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.1",
+      "version": "1.9.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {

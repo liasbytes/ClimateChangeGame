@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     float horizontalMove = 0f;
     bool jump = false;
+    InputAction moveAction;
+    InputAction jumpAction;
 
     bool atHospital = false;
     private void Start()
@@ -45,6 +48,9 @@ public class PlayerController : MonoBehaviour
         isDead = false;
         isRespawned = false;
         deathTimer = 2;
+
+        moveAction = InputSystem.actions.FindAction("Move");
+        jumpAction = InputSystem.actions.FindAction("Jump");
     }
 
     void Update()
@@ -126,9 +132,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            //horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            horizontalMove = moveAction.ReadValue<Vector2>().x*runSpeed;
 
-            if (Input.GetButtonDown("Jump"))
+            //if (Input.GetButtonDown("Jump"))
+            if (jumpAction.IsPressed())
             {
                 jump = true;
             }
