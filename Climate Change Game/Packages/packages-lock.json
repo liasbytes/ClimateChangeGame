@@ -170,14 +170,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.inputsystem": {
-      "version": "file:C:/Users/zshep/Downloads/InputSystem-1.8.1/InputSystem-1.8.1/Packages/com.unity.inputsystem",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      }
-    },
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 1,
