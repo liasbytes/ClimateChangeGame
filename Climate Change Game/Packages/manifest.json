@@ -1,11 +1,11 @@
 {
   "dependencies": {
+    "com.unity.inputsystem": "file:./InputSystem-1.8.1/InputSystem-1.8.1/Packages/com.unity.inputsystem",
     "com.unity.cinemachine": "2.10.0",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.feature.2d": "2.0.0",
     "com.unity.ide.rider": "3.0.28",
     "com.unity.ide.visualstudio": "2.0.22",
-    "com.unity.inputsystem": "file:C:/Users/zshep/Downloads/InputSystem-1.8.1/InputSystem-1.8.1/Packages/com.unity.inputsystem",
     "com.unity.postprocessing": "3.4.0",
     "com.unity.render-pipelines.universal": "14.0.11",
     "com.unity.test-framework": "1.1.33",
