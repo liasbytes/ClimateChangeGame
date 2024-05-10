@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "Escape",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "ae275bfa-21c6-480d-97da-fe7ba9fd2330",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -114,7 +114,7 @@
                 {
                     "name": "",
                     "id": "52d0dbdd-7781-4216-acdc-cd6326aa22f1",
-                    "path": "",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

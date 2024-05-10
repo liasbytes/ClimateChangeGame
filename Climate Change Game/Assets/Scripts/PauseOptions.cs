@@ -11,19 +11,19 @@ public class PauseOptions : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    private InputAction escape;
+    InputAction escape;
 
     void Start()
     {   
         blackScreen.gameObject.SetActive(true);
         blackScreen.DelayedFadeOut((float)0.2);
-        escape = InputSystem.actions.FindAction("Pause");
+        escape = InputSystem.actions.FindAction("Escape");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (escape.IsPressed())
+        if (escape.WasPressedThisFrame())
         {
             if (GameIsPaused)
             {
