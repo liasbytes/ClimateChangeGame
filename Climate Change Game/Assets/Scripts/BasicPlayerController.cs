@@ -157,8 +157,8 @@ public class BasicPlayerController : MonoBehaviour
     {
         health = startHealth;
         isDead = true;
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
+        //GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
