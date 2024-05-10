@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour
     private Vector3[] waypoints;
     public Vector3 closestPlayerWaypoint;
     public Vector3 closestWaypoint;
-    private int closestWaypointIndex;
+    public int closestWaypointIndex;
     [SerializeField]
     public Transform playerPosition;
     [SerializeField]
@@ -58,8 +58,11 @@ public class EnemyController : MonoBehaviour
                     {
                         if (Vector3.Distance(waypoints[i], playerPosition.position) < Vector3.Distance(closestPlayerWaypoint, playerPosition.position))
                         {
-                            closestPlayerWaypoint = waypoints[i];
-                            closestWaypointIndex = i;
+                            if (i != currentTargetIndex)
+                            {
+                                closestPlayerWaypoint = waypoints[i];
+                                closestWaypointIndex = i;
+                            }
                         }
                         /*if (Vector3.Distance(waypoints[i],transform.position) > 0.1f)
                         {
@@ -75,7 +78,15 @@ public class EnemyController : MonoBehaviour
                             }
                         }*/
                     }
-                    int newTargetIndex = closestWaypointIndex;
+                    if (closestWaypointIndex < currentTargetIndex)
+                    {
+                        currentTargetIndex = Mathf.Max(currentTargetIndex - 1, 0);
+                    } else if (closestWaypointIndex > currentTargetIndex)
+                    {
+                        currentTargetIndex++;
+                        currentTargetIndex = currentTargetIndex% waypoints.Length;
+                    } 
+                    /*int newTargetIndex = closestWaypointIndex;
                     if (closestWaypointIndex != currentTargetIndex)
                     {
                         for (int i = 0; i < waypoints.Length; i++)
@@ -93,9 +104,9 @@ public class EnemyController : MonoBehaviour
                             }
                         }
                     }
-                    currentTargetIndex = newTargetIndex;
+                    currentTargetIndex = newTargetIndex;*/
                 }
-                distance = Vector3.Distance(transform.position, closestWaypoint);
+                distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
 
                 if (distance < 0.1)
                 {
