@@ -9696,8 +9696,12 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1425228440}
   dialogueText: {fileID: 1886437962}
   dialogue:
-  - HALLO
-  - git me medicine
+  - "Hey chap, I\u2019m so glad you came!"
+  - 'We need your help immediately. '
+  - "The patient can\u2019t breathe too well. We need you to get the ventilator body
+    and mask. "
+  - "Oh and also don\u2019t forget the medicine. "
+  - Hurry! He needs you.
   wordSpeed: 0.06
   playerIsClose: 0
 --- !u!1 &846891970
