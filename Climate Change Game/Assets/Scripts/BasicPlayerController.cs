@@ -43,7 +43,7 @@ public class BasicPlayerController : MonoBehaviour
 
         damageTimer = damageTimerStart;
         health = startHealth;
-        cpNum = -1;
+        cpNum = 0;
         isDead = false;
         isRespawned = false;
         deathTimer = 2;
