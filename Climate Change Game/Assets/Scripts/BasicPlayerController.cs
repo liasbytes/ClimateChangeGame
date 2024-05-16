@@ -131,7 +131,7 @@ public class BasicPlayerController : MonoBehaviour
 
             horizontalMove = moveAction.ReadValue<Vector2>().x*runSpeed;
         
-            if (jumpAction.WasPressedThisFrame())
+            if (jumpAction.IsPressed())
             {
                 if (controller.GetGrounded()) {
                     anim.SetTrigger("takeoff");

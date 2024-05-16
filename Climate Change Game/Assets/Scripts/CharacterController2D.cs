@@ -29,7 +29,7 @@ public class CharacterController2D : MonoBehaviour
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
-		k_GroundedSize = new Vector2(.9f, .2f);
+		k_GroundedSize = new Vector2(.5f, .15f);
 	}
 
 	private void FixedUpdate()

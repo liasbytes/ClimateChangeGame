@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 97909788}
   - component: {fileID: 97909790}
   - component: {fileID: 97909789}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Windowsills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8676,7 +8676,7 @@ PrefabInstance:
     - target: {fileID: 7336585313421947582, guid: 66496c75e342e5849919d0692b9f188d, type: 3}
       propertyPath: playerPosition
       value: 
-      objectReference: {fileID: 737869462}
+      objectReference: {fileID: 328987651}
     - target: {fileID: 7336585313421947582, guid: 66496c75e342e5849919d0692b9f188d, type: 3}
       propertyPath: thresholdDistance
       value: 10
@@ -18749,7 +18749,7 @@ GameObject:
   - component: {fileID: 1470818967}
   - component: {fileID: 1470818969}
   - component: {fileID: 1470818968}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Main Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51247,11 +51247,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3016036586482356151, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.014
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3016036586482356151, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.57
+      value: 0.581
       objectReference: {fileID: 0}
     - target: {fileID: 3969385881423980603, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalRotation.z
@@ -51264,6 +51264,14 @@ PrefabInstance:
     - target: {fileID: 4465661984115855494, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.16116677
+      objectReference: {fileID: 0}
+    - target: {fileID: 4657598271814240721, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      propertyPath: m_Size.y
+      value: 1.992541
+      objectReference: {fileID: 0}
+    - target: {fileID: 4657598271814240721, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.5750315
       objectReference: {fileID: 0}
     - target: {fileID: 4785404222059238412, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalRotation.w
