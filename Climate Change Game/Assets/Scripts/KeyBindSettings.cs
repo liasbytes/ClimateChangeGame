@@ -31,14 +31,6 @@ public class KeyBindSettings : MonoBehaviour
         jump.text = keyDict["Jump"].ToString();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(keyDict["Left"]))
-        {
-            Debug.Log("Left");
-        }
-    }
 
     void OnGUI()
     {
