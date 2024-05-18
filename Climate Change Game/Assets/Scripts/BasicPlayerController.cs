@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class BasicPlayerController : MonoBehaviour
 {
@@ -20,6 +22,11 @@ public class BasicPlayerController : MonoBehaviour
     private float damageTimer;
     private bool canTakeDamage = true;
     public RectTransform healthBar;
+    private Color initialColor;
+    private Color finalColor;
+    public Volume defaultVolume;
+    private Vignette vignette;
+
 
     public Transform respawnLocation;
     public int cpNum;
@@ -47,6 +54,9 @@ public class BasicPlayerController : MonoBehaviour
         isDead = false;
         isRespawned = false;
         deathTimer = 2;
+
+        initialColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
+        finalColor = new Color(0.6f, 0.0f, 0.0f, 1.0f);;
     }
 
     void Update()
@@ -96,30 +106,25 @@ public class BasicPlayerController : MonoBehaviour
             }
             else
             {
-                /**if (damageTimer > damageTimerStart * 5f / 6)
-                {
-                    playerSprite.color = Color.Lerp(initialColor, finalColor, 1f - (float)((damageTimer - 5f / 6) * 6));
+                defaultVolume.profile.TryGet(out vignette);
+                {          
+                    if (damageTimer > damageTimerStart * 3f / 4)
+                    {
+                        vignette.color.Override(Color.Lerp(initialColor, finalColor, 1f - (float)((damageTimer - 3f / 4) * 6)));
+                    }
+                    else if (damageTimer > damageTimerStart * 2f / 4)
+                    {
+                        vignette.color.Override(Color.Lerp(finalColor, initialColor, 1f - (float)((damageTimer - 0.5f) * 6)));
+                    }
+                    else if (damageTimer > damageTimerStart * 1f / 4)
+                    {
+                        vignette.color.Override(Color.Lerp(initialColor, finalColor, 1f - (float)((damageTimer - 1f / 4) * 6)));
+                    }
+                    else
+                    {
+                        vignette.color.Override(Color.Lerp(finalColor, initialColor, 1f - (float)(damageTimer * 4)));
+                    }
                 }
-                else if (damageTimer > damageTimerStart * 4f / 6)
-                {
-                    playerSprite.color = Color.Lerp(finalColor, initialColor, 1f - (float)((damageTimer - 4f / 6) * 6));
-                }
-                else if (damageTimer > damageTimerStart * 3f / 6)
-                {
-                    playerSprite.color = Color.Lerp(initialColor, finalColor, 1f - (float)((damageTimer - 0.5f) * 6));
-                }
-                else if (damageTimer > damageTimerStart * 2f / 6)
-                {
-                    playerSprite.color = Color.Lerp(finalColor, initialColor, 1f - (float)((damageTimer - 2f / 6) * 6));
-                }
-                else if (damageTimer > damageTimerStart * 1f / 6)
-                {
-                    playerSprite.color = Color.Lerp(initialColor, finalColor, 1f - (float)((damageTimer - 1f / 6) * 6));
-                }
-                else
-                {
-                    playerSprite.color = Color.Lerp(finalColor, initialColor, 1f - (float)(damageTimer * 6));
-                } **/
 
                 damageTimer -= Time.deltaTime;
                 if (damageTimer < 0)
