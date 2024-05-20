@@ -11033,7 +11033,6 @@ MonoBehaviour:
   brightnessSlider: {fileID: 2165865295671130543}
   defaultVolume: {fileID: 0}
   UIVolume: {fileID: 0}
-  camera: {fileID: 0}
 --- !u!114 &3948331657028286334
 MonoBehaviour:
   m_ObjectHideFlags: 0
