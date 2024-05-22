@@ -138,10 +138,25 @@ public class BasicPlayerController : MonoBehaviour
         
             if (jumpAction.IsPressed())
             {
-                if (controller.GetGrounded()) {
-                    anim.SetTrigger("takeoff");
+                float currentVelo = GetComponent<Rigidbody2D>().velocity.y;
+                /*float parentVelo = 0;
+                if (transform.parent != null)
+                {
+                    Rigidbody2D parentRigidbody = transform.parent.GetComponent<Rigidbody2D>();
+                    if (parentRigidbody != null)
+                    {
+                        parentVelo = parentRigidbody.velocity.y;
+                    }
+                }*/
+                
+                if (currentVelo <= 0.1f )
+                {
+                    if (controller.GetGrounded())
+                    {
+                        anim.SetTrigger("takeoff");
+                    }
+                    jump = true;
                 }
-                jump = true;
             }
         }        
     }
@@ -153,6 +168,7 @@ public class BasicPlayerController : MonoBehaviour
             controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
         }
         jump = false;
+        //Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
 
         anim.SetBool("isRunning", (horizontalMove != 0));
         anim.SetBool("isJumping", !controller.GetGrounded());
@@ -191,7 +207,21 @@ public class BasicPlayerController : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D other) {
         if (other.transform.tag == "MovingPlatform") {
+            //Debug.Log("unparented");
             transform.parent = null;
+            Vector2 velo = GetComponent<Rigidbody2D>().velocity;
+            //Debug.Log(other.transform.GetComponent<Rigidbody2D>().velocity.y);
+            //velo.y -= other.transform.GetComponent<Rigidbody2D>().velocity.y;
+            float offset = other.transform.GetComponent<Platform_one_movement>().velocity.y;
+            if (offset < 0)
+            {
+                velo.y += offset;
+            } else
+            {
+                velo.y += offset * 0.5f;
+            }
+            GetComponent<Rigidbody2D>().velocity = velo;
+            
             atHospital = false;
         }
     }

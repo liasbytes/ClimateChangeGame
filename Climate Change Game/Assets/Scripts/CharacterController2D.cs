@@ -29,7 +29,7 @@ public class CharacterController2D : MonoBehaviour
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
 
-		k_GroundedSize = new Vector2(.5f, .15f);
+		k_GroundedSize = new Vector2(.4f, .15f);
 	}
 
 	private void FixedUpdate()
@@ -58,6 +58,7 @@ public class CharacterController2D : MonoBehaviour
 		Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
 		// And then smoothing it out and applying it to the character
 		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+		//Debug.Log(m_Rigidbody2D.velocity.x);
 
 		// If the input is moving the player right and the player is facing left...
 		if (move > 0 && !m_FacingRight)
@@ -76,7 +77,7 @@ public class CharacterController2D : MonoBehaviour
 		{
 			// Add a vertical force to the player.
 			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		}
 	}
 
