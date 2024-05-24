@@ -1,6 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-685435987059542506
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: UI Post Profile
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: 4211756574484444798}
+  - {fileID: 955907444690986766}
+--- !u!114 &955907444690986766
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,28 +30,13 @@ MonoBehaviour:
   active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.94146764, y: 1, z: 0.93082976, w: 0.0000000062485297}
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.8918375, y: 0.8350139, z: 1, w: -0.010395001}
+    m_Value: {x: 0.8118505, y: 0.7903188, z: 1, w: 0.031185023}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.3534303}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: UI Post Profile
-  m_EditorClassIdentifier: 
-  components:
-  - {fileID: -685435987059542506}
-  - {fileID: 4211756574484444798}
+    m_Value: {x: 1, y: 0.9534925, z: 0.88046336, w: 0}
 --- !u!114 &4211756574484444798
 MonoBehaviour:
   m_ObjectHideFlags: 3

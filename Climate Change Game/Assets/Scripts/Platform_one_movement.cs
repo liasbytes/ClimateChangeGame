@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 // Code based upon https://medium.com/@pkillman2000/moving-platforms-in-unity-c7548fe1220c
 
@@ -10,11 +11,13 @@ public class Platform_one_movement : MonoBehaviour
     public float movementSpeed;
     private int currentTargetIndex = 0;
     private float distance;
+
+    public Vector3 velocity;
     
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {  
+
     }
 
     // Update is called once per frame
@@ -26,6 +29,9 @@ public class Platform_one_movement : MonoBehaviour
             currentTargetIndex++;
             currentTargetIndex = currentTargetIndex % waypoints.Length;
         } else {
+            velocity = waypoints[currentTargetIndex]-transform.position;
+            velocity.Normalize();
+            velocity *= movementSpeed;
             transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
         }
     }

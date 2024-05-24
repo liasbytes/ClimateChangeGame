@@ -10,6 +10,7 @@ public class PauseOptions : MonoBehaviour
     public FadeUI blackScreen;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject settingsMenuUI;
 
     InputAction escape;
 
@@ -25,12 +26,14 @@ public class PauseOptions : MonoBehaviour
     {
         if (escape.WasPressedThisFrame())
         {
-            if (GameIsPaused)
-            {
-                ResumeGame();
-            } else
-            {
-                PauseGame();
+            if (!settingsMenuUI.activeSelf) {
+                if (GameIsPaused)
+                {
+                    ResumeGame();
+                } else
+                {
+                    PauseGame();
+                }
             }
         }
     }
