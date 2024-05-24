@@ -23,7 +23,7 @@ public class Doctor2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerIsClose)
+        if (playerIsClose && Input.GetKeyDown(KeyCode.T))
         {
             if (!dialoguePanel.activeInHierarchy)
             {
