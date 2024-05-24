@@ -166,19 +166,21 @@ public class BasicPlayerController : MonoBehaviour
         if (!isDead)
         {
             controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+            anim.SetBool("isRunning", (horizontalMove != 0));
+            anim.SetBool("isJumping", !controller.GetGrounded());
         }
         jump = false;
         //Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
 
-        anim.SetBool("isRunning", (horizontalMove != 0));
-        anim.SetBool("isJumping", !controller.GetGrounded());
     }
 
     void Die()
     {
         health = startHealth;
         isDead = true;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        anim.SetBool("isRunning", false);
+        anim.SetBool("isJumping", false);
         //GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
     }
 
