@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class BasicPlayerController : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class BasicPlayerController : MonoBehaviour
     private Color finalColor;
     public Volume defaultVolume;
     private Vignette vignette;
+    public FadeUI blackScreen;
 
 
     public Transform respawnLocation;
@@ -139,15 +141,6 @@ public class BasicPlayerController : MonoBehaviour
             if (jumpAction.IsPressed())
             {
                 float currentVelo = GetComponent<Rigidbody2D>().velocity.y;
-                /*float parentVelo = 0;
-                if (transform.parent != null)
-                {
-                    Rigidbody2D parentRigidbody = transform.parent.GetComponent<Rigidbody2D>();
-                    if (parentRigidbody != null)
-                    {
-                        parentVelo = parentRigidbody.velocity.y;
-                    }
-                }*/
                 
                 if (currentVelo <= 0.1f )
                 {
@@ -170,8 +163,6 @@ public class BasicPlayerController : MonoBehaviour
             anim.SetBool("isJumping", !controller.GetGrounded());
         }
         jump = false;
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
-
     }
 
     void Die()
@@ -181,7 +172,6 @@ public class BasicPlayerController : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
         anim.SetBool("isRunning", false);
         anim.SetBool("isJumping", false);
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
@@ -204,16 +194,17 @@ public class BasicPlayerController : MonoBehaviour
         } else if (other.gameObject.layer == 8)
         {
             Die();
+        } else if (other.gameObject.tag == "CityLevelEnd")
+        {
+            Time.timeScale = 1f;
+            StartCoroutine(fadeAndLoad());
         }
     }
 
     void OnCollisionExit2D(Collision2D other) {
         if (other.transform.tag == "MovingPlatform") {
-            //Debug.Log("unparented");
             transform.parent = null;
             Vector2 velo = GetComponent<Rigidbody2D>().velocity;
-            //Debug.Log(other.transform.GetComponent<Rigidbody2D>().velocity.y);
-            //velo.y -= other.transform.GetComponent<Rigidbody2D>().velocity.y;
             float offset = other.transform.GetComponent<Platform_one_movement>().velocity.y;
             if (offset < 0)
             {
@@ -230,5 +221,12 @@ public class BasicPlayerController : MonoBehaviour
 
     public bool GetCollisions() {
         return atHospital;
+    }
+
+    IEnumerator fadeAndLoad()
+    {
+        blackScreen.FadeIn();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("WinScreen");
     }
 }
