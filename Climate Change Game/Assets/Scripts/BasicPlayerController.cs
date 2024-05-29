@@ -40,7 +40,7 @@ public class BasicPlayerController : MonoBehaviour
 
     bool atHospital = false;
 
-    void Start() 
+    void Awake() 
     {
         anim = GetComponent<Animator>();
         controller = GetComponent<CharacterController2D>();
@@ -56,7 +56,7 @@ public class BasicPlayerController : MonoBehaviour
         deathTimer = 2;
 
         initialColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-        finalColor = new Color(0.6f, 0.0f, 0.0f, 1.0f);;
+        finalColor = new Color(0.6f, 0.0f, 0.0f, 1.0f);
     }
 
     void Update()

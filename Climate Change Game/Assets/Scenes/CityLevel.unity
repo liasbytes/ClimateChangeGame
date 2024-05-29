@@ -863,11 +863,11 @@ GameObject:
   - component: {fileID: 114516579}
   m_Layer: 0
   m_Name: Inventory
-  m_TagString: Untagged
+  m_TagString: InventoryManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &114516579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1348,6 +1348,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48e4a56310177844cb8a26bf2a174a00, type: 3}
+--- !u!4 &311761852 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3357830288433584691, guid: 48e4a56310177844cb8a26bf2a174a00, type: 3}
+  m_PrefabInstance: {fileID: 311761851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &328987651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9080766586656210572, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
@@ -10095,7 +10100,7 @@ GameObject:
   - component: {fileID: 737869458}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18342,7 +18347,7 @@ Transform:
   m_GameObject: {fileID: 1098253460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.29555315, y: -3.867591, z: 11.141556}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18360,8 +18365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b458e9c661c77c478836b4492205a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 737869460}
+  playerData: {fileID: 2648083243738785487}
   inventoryData: {fileID: 114516579}
+  loading: 0
+  permanent: 1
 --- !u!114 &1111098751 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5067832645457311318, guid: 2e11b11044db63c488749b564a058e69, type: 3}
@@ -18585,7 +18592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1165285905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20042,6 +20049,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1098253462}
+        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+        m_MethodName: writeSaveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 719202881}
         m_TargetAssemblyTypeName: PauseOptions, Assembly-CSharp
         m_MethodName: QuitToHome
@@ -55439,7 +55458,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1781175865
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57755,6 +57774,10 @@ PrefabInstance:
       propertyPath: defaultVolume
       value: 
       objectReference: {fileID: 1513076384}
+    - target: {fileID: 756902166631103715, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      propertyPath: respawnLocation
+      value: 
+      objectReference: {fileID: 311761852}
     - target: {fileID: 1304363520512061887, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_JumpForce
       value: 350
@@ -57883,6 +57906,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7984113365572806383, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8359900656403734528, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.024686132
@@ -57952,6 +57979,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+--- !u!114 &2648083243738785487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 756902166631103715, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+  m_PrefabInstance: {fileID: 2648083243738785486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb757b087f941c14eb7fa809ee15b9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2950996770882455293
 Transform:
   m_ObjectHideFlags: 0

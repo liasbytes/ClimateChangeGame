@@ -3,12 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-// Some file writing code adapted from https://github.com/UnityTechnologies/UniteNow20-Persistent-Data
+// File writing code adapted from https://github.com/UnityTechnologies/UniteNow20-Persistent-Data
 public class DataManager : MonoBehaviour
 {
-    public PlayerController playerData;
+    public BasicPlayerController playerData;
     public InventorySystem inventoryData;
+
+    public bool loading;
+    public bool permanent;
+
+    public void OnEnable()
+    {
+        if (!permanent)
+        {
+            SceneManager.sceneLoaded += onSceneLoaded;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        loading = false;
+    }
+
+    void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "CityLevel")
+        {
+            if (loading == true)
+            {
+                Debug.Log(GameObject.FindGameObjectsWithTag("Player"));
+                playerData = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<BasicPlayerController>();
+                inventoryData = GameObject.FindGameObjectsWithTag("InventoryManager")[0].GetComponent<InventorySystem>();
+                readSaveData();
+                //Debug.Log("Loaded City Level");
+            }
+            SceneManager.sceneLoaded -= onSceneLoaded;
+            Destroy(this.gameObject);
+        }
+    }
 
     public void writeSaveData()
     {
