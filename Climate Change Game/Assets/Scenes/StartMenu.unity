@@ -1164,6 +1164,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 353272572}
   m_CullTransparentMesh: 1
+--- !u!1 &354022878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354022879}
+  - component: {fileID: 354022880}
+  m_Layer: 0
+  m_Name: LoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354022879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354022878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &354022880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354022878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b458e9c661c77c478836b4492205a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 0}
+  inventoryData: {fileID: 0}
+  loading: 0
+  permanent: 0
 --- !u!1 &367291675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1337,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 92539100}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 70
     OrthographicSize: 7
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -9124,6 +9172,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 872282044}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 464430201}
         m_TargetAssemblyTypeName: FadeUI, Assembly-CSharp
         m_MethodName: FadeOut
@@ -9135,7 +9195,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
       - m_Target: {fileID: 92539101}
         m_TargetAssemblyTypeName: MenuCameraFollow, Assembly-CSharp
         m_MethodName: openLoads
@@ -9147,7 +9207,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
       - m_Target: {fileID: 444991721}
         m_TargetAssemblyTypeName: FadeUI, Assembly-CSharp
         m_MethodName: DelayedFadeIn
@@ -9159,7 +9219,7 @@ MonoBehaviour:
           m_FloatArgument: 1.3
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
+        m_CallState: 0
 --- !u!114 &608947967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10468,6 +10528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blackScreen: {fileID: 1576760647}
+  dataManager: {fileID: 354022880}
 --- !u!114 &872282045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14591,8 +14652,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6491845454649556377, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
+      propertyPath: field of view
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6491845454649556377, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 2007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299101906237840642, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299101906237840642, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9124005147270038819, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_IsActive
@@ -14734,3 +14807,4 @@ SceneRoots:
   - {fileID: 693199362}
   - {fileID: 619203314}
   - {fileID: 1559921098}
+  - {fileID: 354022879}

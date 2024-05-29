@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public FadeUI blackScreen;
+    public DataManager dataManager;
+
     void Start()
     {
         blackScreen.gameObject.SetActive(true);
@@ -16,14 +18,17 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
     }
     public void StartLevel()
-    {
-        StartCoroutine(fadeAndLoad());
+    {   
         Time.timeScale = 1f;
+        dataManager.loading = false;
+        StartCoroutine(fadeAndLoad());
     }
 
     public void LoadLevel()
     {
-        // add code?
+        dataManager.loading = true;
+        Time.timeScale = 1f;
+        StartCoroutine(fadeAndLoad());
     }
 
     public void QuitGame()
@@ -37,7 +42,7 @@ public class MenuManager : MonoBehaviour
     IEnumerator fadeAndLoad() {
         blackScreen.FadeIn();
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("CityLevel"); // from load game page: should load to specified checkpoint
+        SceneManager.LoadScene("CityLevel");
     }
 
 }

@@ -9,6 +9,8 @@ TagManager:
   - MovingPlatform3
   - MovingPlatform
   - blackscreen
+  - InventoryManager
+  - CityLevelEnd
   layers:
   - Default
   - TransparentFX
