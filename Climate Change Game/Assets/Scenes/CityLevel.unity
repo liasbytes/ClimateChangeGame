@@ -55110,7 +55110,7 @@ MonoBehaviour:
   ambientSlider: {fileID: 938400261}
   brightnessSlider: {fileID: 1126076799}
   defaultVolume: {fileID: 1513076384}
-  UIVolume: {fileID: 0}
+  UIVolume: {fileID: 527280064}
 --- !u!4 &1562781603
 Transform:
   m_ObjectHideFlags: 0
@@ -56855,11 +56855,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5042209069598861609, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.3647337
+      value: 4.3193808
       objectReference: {fileID: 0}
     - target: {fileID: 5042209069598861609, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.92692
+      value: -0.92757
       objectReference: {fileID: 0}
     - target: {fileID: 5042209069598861609, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57802,6 +57802,10 @@ PrefabInstance:
     - target: {fileID: 3016036586482356151, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.592
+      objectReference: {fileID: 0}
+    - target: {fileID: 3969385881423980603, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3969385881423980603, guid: e5f42a9f848dfee4d8cce38a7fd48403, type: 3}
       propertyPath: m_LocalRotation.z

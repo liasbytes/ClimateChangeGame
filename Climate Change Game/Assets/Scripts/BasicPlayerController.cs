@@ -15,6 +15,7 @@ public class BasicPlayerController : MonoBehaviour
     public float runSpeed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
+    bool attack = false;
 
     public float startHealth;
     public float health;
@@ -35,8 +36,7 @@ public class BasicPlayerController : MonoBehaviour
     private bool isRespawned;
     private float deathTimer;
 
-    InputAction moveAction;
-    InputAction jumpAction;
+    InputAction moveAction, jumpAction, attackAction;
 
     bool atHospital = false;
 
@@ -47,6 +47,7 @@ public class BasicPlayerController : MonoBehaviour
 
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        attackAction = InputSystem.actions.FindAction("Attack");
 
         damageTimer = damageTimerStart;
         health = startHealth;
@@ -158,6 +159,14 @@ public class BasicPlayerController : MonoBehaviour
                     jump = true;
                 }
             }
+
+            if (attackAction.WasPressedThisFrame()) {
+                if (controller.GetGrounded()) {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
+                    anim.SetTrigger("attack");
+                    attack = true;
+                }
+            }
         }        
     }
 
@@ -165,23 +174,27 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (!isDead)
         {
-            controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+            if (!attack) {
+                controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+            }
             anim.SetBool("isRunning", (horizontalMove != 0));
             anim.SetBool("isJumping", !controller.GetGrounded());
         }
         jump = false;
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
+    }
 
+    public void AttackEnd()
+    {
+        attack = false;
     }
 
     void Die()
     {
         health = startHealth;
         isDead = true;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
         anim.SetBool("isRunning", false);
         anim.SetBool("isJumping", false);
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
