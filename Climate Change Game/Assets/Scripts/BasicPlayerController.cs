@@ -44,6 +44,7 @@ public class BasicPlayerController : MonoBehaviour
     bool atHospital = false;
     bool m_Started;
     public ParticleSystem attackEffect;
+    public SFXController soundController;
 
     void Awake() 
     {
@@ -150,6 +151,7 @@ public class BasicPlayerController : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
                     anim.SetTrigger("attack");
                     attack = true;
+                    soundController.startAttack();
                 }
             }
             else if (jumpAction.IsPressed())
@@ -161,6 +163,7 @@ public class BasicPlayerController : MonoBehaviour
                     if (controller.GetGrounded() && !attack)
                     {
                         anim.SetTrigger("takeoff");
+                        soundController.startJump();
                     }
                     jump = true;
                 }
@@ -174,6 +177,14 @@ public class BasicPlayerController : MonoBehaviour
         {
             if (!attack) {
                 controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+                if (horizontalMove != 0 && controller.GetGrounded())
+                {
+                    soundController.startWalk();
+                } else
+                {
+                    soundController.endWalk();
+                }
+                
             }
             anim.SetBool("isRunning", (horizontalMove != 0));
             anim.SetBool("isJumping", !controller.GetGrounded());
