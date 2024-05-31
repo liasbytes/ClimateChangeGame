@@ -183,6 +183,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             return true;
         }
 
+        public void Start()
+        {
+            UpdateBindingDisplay();
+        }
+
         /// <summary>
         /// Trigger a refresh of the currently displayed binding.
         /// </summary>
