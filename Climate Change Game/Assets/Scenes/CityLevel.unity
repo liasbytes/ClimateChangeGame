@@ -11617,17 +11617,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &938400261 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8529262421952616775, guid: 2e11b11044db63c488749b564a058e69, type: 3}
-  m_PrefabInstance: {fileID: 1853518503}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &959631300
 GameObject:
   m_ObjectHideFlags: 0
@@ -18581,17 +18570,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1084134062 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6311534942175579686, guid: 2e11b11044db63c488749b564a058e69, type: 3}
-  m_PrefabInstance: {fileID: 1853518503}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1086900662
 GameObject:
   m_ObjectHideFlags: 0
@@ -55401,7 +55379,6 @@ MonoBehaviour:
   masterLabel: {fileID: 1214607508}
   musicLabel: {fileID: 1122189074}
   sfxLabel: {fileID: 416864125}
-  ambientLabel: {fileID: 1084134062}
   qualityLabel: {fileID: 364113800}
   bloomLabel: {fileID: 717887686}
   aliasingLabel: {fileID: 1600805494}
@@ -55411,7 +55388,6 @@ MonoBehaviour:
   masterSlider: {fileID: 1986926829}
   musicSlider: {fileID: 593367637}
   sfxSlider: {fileID: 276618518}
-  ambientSlider: {fileID: 938400261}
   brightnessSlider: {fileID: 1126076799}
   defaultVolume: {fileID: 1513076384}
   UIVolume: {fileID: 527280064}
@@ -56879,7 +56855,8 @@ PrefabInstance:
     - {fileID: 3948331657028286334, guid: 2e11b11044db63c488749b564a058e69, type: 3}
     - {fileID: 8807429362759182746, guid: 2e11b11044db63c488749b564a058e69, type: 3}
     - {fileID: 8494600727743232235, guid: 2e11b11044db63c488749b564a058e69, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 853248508135677205, guid: 2e11b11044db63c488749b564a058e69, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e11b11044db63c488749b564a058e69, type: 3}
@@ -57145,7 +57122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5042209069598861609, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.3193808
+      value: 4.314987
       objectReference: {fileID: 0}
     - target: {fileID: 5042209069598861609, guid: ed7785f5f6f9f754c9255986bac3cdb5, type: 3}
       propertyPath: m_LocalPosition.y
