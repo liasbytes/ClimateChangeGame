@@ -96,4 +96,9 @@ public class CharacterController2D : MonoBehaviour
 	{
 		return m_Grounded;
 	}
+
+	public bool GetFacingRight() 
+	{
+		return m_FacingRight;
+	}
 }

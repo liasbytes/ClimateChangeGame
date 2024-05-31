@@ -19,7 +19,6 @@ public class LockedLever : MonoBehaviour
             platform.movementSpeed = 5;
             // play animation
         } else {
-            Debug.Log("Not too fast! You need '" + key.name + "' to pass.");
             // potentially add dialogue box, etc. here on screen
         }            
     }
