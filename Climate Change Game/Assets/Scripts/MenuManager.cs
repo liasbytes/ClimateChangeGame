@@ -42,7 +42,7 @@ public class MenuManager : MonoBehaviour
     IEnumerator fadeAndLoad() {
         blackScreen.FadeIn();
         yield return new WaitForSeconds(1);
-        SceneManager.LoadScene("CityLevel"); // from load game page: should load to specified checkpoint
+        SceneManager.LoadScene("CityLevel");
     }
 
 }

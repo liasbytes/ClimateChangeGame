@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private Color initialColor;
     private Color finalColor;
     private SpriteRenderer enemySprite;
+    //private Rigidbody2D m_Rigidbody2D;
 
 
     public Transform healthBar;
@@ -44,6 +45,7 @@ public class EnemyController : MonoBehaviour
         health = maxHealth;
         closestPlayerWaypoint = Vector3.positiveInfinity;
         closestWaypoint = Vector3.positiveInfinity;
+        //m_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -64,19 +66,6 @@ public class EnemyController : MonoBehaviour
                                 closestWaypointIndex = i;
                             }
                         }
-                        /*if (Vector3.Distance(waypoints[i],transform.position) > 0.1f)
-                        {
-                            
-                            float angleCurrent = Vector3.Angle(playerPosition.position - transform.position, closestWaypoint - transform.position);
-                            float angleNew = Vector3.Angle(playerPosition.position - transform.position, waypoints[i] - transform.position);
-                            float weightedDistanceCurrent =  Vector3.Distance(closestWaypoint, transform.position)/ Mathf.Cos(angleCurrent);
-                            float weightedDistanceNew =  Vector3.Distance(waypoints[i], transform.position)/ Mathf.Cos(angleNew);
-                            if (weightedDistanceNew >= 0 && weightedDistanceNew < weightedDistanceCurrent)
-                            {
-                                closestWaypoint = waypoints[i];
-                                currentTargetIndex = i;
-                            }
-                        }*/
                     }
                     if (closestWaypointIndex < currentTargetIndex)
                     {
@@ -86,25 +75,7 @@ public class EnemyController : MonoBehaviour
                         currentTargetIndex++;
                         currentTargetIndex = currentTargetIndex% waypoints.Length;
                     } 
-                    /*int newTargetIndex = closestWaypointIndex;
-                    if (closestWaypointIndex != currentTargetIndex)
-                    {
-                        for (int i = 0; i < waypoints.Length; i++)
-                        {
-                            if (i != currentTargetIndex)
-                            {
-                                if (Mathf.Sign(currentTargetIndex - i) == Mathf.Sign(closestWaypointIndex - i))
-                                {
-                                    if (Vector3.Distance(waypoints[i], transform.position) < Vector3.Distance(closestWaypoint, transform.position))
-                                    {
-                                        closestWaypoint = waypoints[i];
-                                        newTargetIndex = i;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    currentTargetIndex = newTargetIndex;*/
+                    
                 }
                 distance = Vector3.Distance(transform.position, waypoints[currentTargetIndex]);
 
@@ -115,6 +86,16 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
+                    Vector3 scale = transform.localScale;
+                    if (scale.x < 0 && waypoints[currentTargetIndex].x < transform.position.x)
+                    {
+                        scale.x *= -1;
+                    }
+                    else if (scale.x > 0 && waypoints[currentTargetIndex].x > transform.position.x)
+                    {
+                        scale.x *= -1;
+                    }
+                    transform.localScale = scale;
                     transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
                 }
             }
@@ -138,6 +119,16 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
+                    Vector3 scale = transform.localScale;
+                    if (scale.x < 0 && waypoints[currentTargetIndex].x < transform.position.x)
+                    {
+                        scale.x *= -1;
+                    }
+                    else if (scale.x > 0 && waypoints[currentTargetIndex].x > transform.position.x)
+                    {
+                        scale.x *= -1;
+                    }
+                    transform.localScale = scale;
                     transform.position = Vector3.MoveTowards(transform.position, waypoints[currentTargetIndex], movementSpeed * Time.deltaTime);
                 }
             }
@@ -185,9 +176,13 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+        } else 
+        {
+            //m_Rigidbody2D.AddForce(new Vector2(0f, 200f)); how can i apply this knockback effect?
+            healthBar.localScale = new Vector3(0.95f * health / maxHealth,0.6f,1);
+            healthBar.position = new Vector3(healthBar.position.x-(1-(0.95f * health / maxHealth))/2f, healthBar.position.y, healthBar.position.z);
         }
-        isDamaged = true;
-        healthBar.localScale = new Vector3(0.95f * health / maxHealth,0.6f,1);
-        healthBar.position = new Vector3(-(1-(0.95f * health / maxHealth))/2f, 0, 0);
+        isDamaged = true;      
+        
     }
 }

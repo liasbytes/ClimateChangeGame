@@ -15,9 +15,9 @@ public class ChangeSettings : MonoBehaviour
     public List<AdvancedItem> advancedLevels = new List<AdvancedItem>();
     private List<string> levels = new List<string>{"Low","Medium","High","Ultra"};
     private int SelectedResolution;
-    public TMP_Text resolutionLabel, masterLabel, musicLabel, sfxLabel, ambientLabel, qualityLabel, bloomLabel, aliasingLabel, processingLabel, brightnessLabel;
+    public TMP_Text resolutionLabel, masterLabel, musicLabel, sfxLabel, qualityLabel, bloomLabel, aliasingLabel, processingLabel, brightnessLabel;
     public AudioMixer mixer;
-    public Slider masterSlider, musicSlider, sfxSlider, ambientSlider, brightnessSlider;
+    public Slider masterSlider, musicSlider, sfxSlider, brightnessSlider;
     public Volume defaultVolume, UIVolume;
     private Bloom bloom;
     private ColorAdjustments colorAdjustments;
@@ -38,19 +38,16 @@ public class ChangeSettings : MonoBehaviour
         }
 
         float volume = 0f;
-        mixer.GetFloat("MasterVol", out volume);
+        volume = PlayerPrefs.GetFloat("MasterVol",0);
         masterSlider.value = Mathf.RoundToInt(volume * 2) + 100;
-        mixer.GetFloat("MusicVol", out volume);
+        volume = PlayerPrefs.GetFloat("MusicVol",0);
         musicSlider.value = Mathf.RoundToInt(volume * 2) + 100;
-        mixer.GetFloat("SFXVol", out volume);
+        volume = PlayerPrefs.GetFloat("SFXVol",0);
         sfxSlider.value = Mathf.RoundToInt(volume * 2) + 100;
-        mixer.GetFloat("AmbientVol", out volume);
-        ambientSlider.value = Mathf.RoundToInt(volume * 2) + 100;
 
         masterLabel.text = masterSlider.value.ToString();
         musicLabel.text = musicSlider.value.ToString();
         sfxLabel.text = sfxSlider.value.ToString();
-        ambientLabel.text = ambientSlider.value.ToString();
 
         advancedLabels = new List<TMP_Text>{qualityLabel, bloomLabel, aliasingLabel, processingLabel};
 
@@ -178,13 +175,6 @@ public class ChangeSettings : MonoBehaviour
         sfxLabel.text = sfxSlider.value.ToString();
         mixer.SetFloat("SFXVol", (float)0.5*(sfxSlider.value-100));
         PlayerPrefs.SetFloat("SFXVol", (float)0.5*(sfxSlider.value-100));
-    }
-
-    public void SetAmbientVolume()
-    {
-        ambientLabel.text = ambientSlider.value.ToString();
-        mixer.SetFloat("AmbientVol", (float)0.5*(ambientSlider.value-100));
-        PlayerPrefs.SetFloat("AmbientVol", (float)0.5*(ambientSlider.value-100));
     }
 
     public void SetBrightness()

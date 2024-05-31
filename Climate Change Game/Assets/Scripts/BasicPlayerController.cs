@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class BasicPlayerController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class BasicPlayerController : MonoBehaviour
     public float runSpeed = 40f;
     float horizontalMove = 0f;
     bool jump = false;
+    bool attack = false;
 
     public float startHealth;
     public float health;
@@ -26,6 +28,7 @@ public class BasicPlayerController : MonoBehaviour
     private Color finalColor;
     public Volume defaultVolume;
     private Vignette vignette;
+    public FadeUI blackScreen;
 
 
     public Transform respawnLocation;
@@ -35,10 +38,12 @@ public class BasicPlayerController : MonoBehaviour
     private bool isRespawned;
     private float deathTimer;
 
-    InputAction moveAction;
-    InputAction jumpAction;
+    InputAction moveAction, jumpAction, attackAction;
+    public LayerMask m_EnemyLayer;
 
     bool atHospital = false;
+    bool m_Started;
+    public ParticleSystem attackEffect;
 
     void Awake() 
     {
@@ -47,6 +52,7 @@ public class BasicPlayerController : MonoBehaviour
 
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
+        attackAction = InputSystem.actions.FindAction("Attack");
 
         damageTimer = damageTimerStart;
         health = startHealth;
@@ -57,6 +63,8 @@ public class BasicPlayerController : MonoBehaviour
 
         initialColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         finalColor = new Color(0.6f, 0.0f, 0.0f, 1.0f);
+        
+        m_Started = true;
     }
 
     void Update()
@@ -136,22 +144,21 @@ public class BasicPlayerController : MonoBehaviour
 
             horizontalMove = moveAction.ReadValue<Vector2>().x*runSpeed;
         
-            if (jumpAction.IsPressed())
+
+            if (attackAction.WasPressedThisFrame()) {
+                if (controller.GetGrounded()) {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
+                    anim.SetTrigger("attack");
+                    attack = true;
+                }
+            }
+            else if (jumpAction.IsPressed())
             {
                 float currentVelo = GetComponent<Rigidbody2D>().velocity.y;
-                /*float parentVelo = 0;
-                if (transform.parent != null)
-                {
-                    Rigidbody2D parentRigidbody = transform.parent.GetComponent<Rigidbody2D>();
-                    if (parentRigidbody != null)
-                    {
-                        parentVelo = parentRigidbody.velocity.y;
-                    }
-                }*/
                 
                 if (currentVelo <= 0.1f )
                 {
-                    if (controller.GetGrounded())
+                    if (controller.GetGrounded() && !attack)
                     {
                         anim.SetTrigger("takeoff");
                     }
@@ -165,23 +172,63 @@ public class BasicPlayerController : MonoBehaviour
     {
         if (!isDead)
         {
-            controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+            if (!attack) {
+                controller.Move(horizontalMove*Time.fixedDeltaTime,jump);
+            }
             anim.SetBool("isRunning", (horizontalMove != 0));
             anim.SetBool("isJumping", !controller.GetGrounded());
         }
         jump = false;
-        //Debug.Log(GetComponent<Rigidbody2D>().velocity.y);
+    }
 
+    public void AttackEnd()
+    {
+        attack = false;
+    }
+
+    public void AttackEnemies() {
+        Vector3 boxPosition = GetComponent<Transform>().position;
+        ParticleSystemRenderer attackRenderer = attackEffect.GetComponent<ParticleSystemRenderer>();
+        var vel = attackEffect.velocityOverLifetime;
+        // determines attack offset
+        if (controller.GetFacingRight()) {
+            boxPosition += new Vector3(2f,0f,0f);
+            attackRenderer.pivot = new Vector3(1f,0f,0f);
+            vel.x = new ParticleSystem.MinMaxCurve(10f);
+        } else {
+            boxPosition += new Vector3(-2f,0f,0f);
+            attackRenderer.pivot = new Vector3(-1f,0f,0f);
+            vel.x = new ParticleSystem.MinMaxCurve(-10f);
+        }
+        attackEffect.Play();
+        // determines attack range
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(boxPosition, new Vector3(5f,2f,0f),0f, m_EnemyLayer);
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].gameObject != gameObject)
+            {
+                enemies[i].GetComponent<EnemyController>().takeDamage(5f);
+            }
+        }  
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+        if (m_Started) {
+            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+            Gizmos.DrawWireCube(GetComponent<Transform>().position + new Vector3(2f,1f,0f), new Vector3(5f,2f,0));
+        }
     }
 
     void Die()
     {
         health = startHealth;
         isDead = true;
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
         anim.SetBool("isRunning", false);
         anim.SetBool("isJumping", false);
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
@@ -204,16 +251,17 @@ public class BasicPlayerController : MonoBehaviour
         } else if (other.gameObject.layer == 8)
         {
             Die();
+        } else if (other.gameObject.tag == "CityLevelEnd")
+        {
+            Time.timeScale = 1f;
+            StartCoroutine(fadeAndLoad());
         }
     }
 
     void OnCollisionExit2D(Collision2D other) {
         if (other.transform.tag == "MovingPlatform") {
-            //Debug.Log("unparented");
             transform.parent = null;
             Vector2 velo = GetComponent<Rigidbody2D>().velocity;
-            //Debug.Log(other.transform.GetComponent<Rigidbody2D>().velocity.y);
-            //velo.y -= other.transform.GetComponent<Rigidbody2D>().velocity.y;
             float offset = other.transform.GetComponent<Platform_one_movement>().velocity.y;
             if (offset < 0)
             {
@@ -230,5 +278,12 @@ public class BasicPlayerController : MonoBehaviour
 
     public bool GetCollisions() {
         return atHospital;
+    }
+
+    IEnumerator fadeAndLoad()
+    {
+        blackScreen.FadeIn();
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("WinScreen");
     }
 }
