@@ -8,7 +8,6 @@ public class EndSceneUI : MonoBehaviour
 {
     public void QuitToHome()
     {
-        Debug.Log("Quitting");
         StartCoroutine(LoadMenu());
     }
 
