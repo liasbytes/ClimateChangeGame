@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private Color initialColor;
     private Color finalColor;
     private SpriteRenderer enemySprite;
+    //private Rigidbody2D m_Rigidbody2D;
 
 
     public Transform healthBar;
@@ -44,6 +45,7 @@ public class EnemyController : MonoBehaviour
         health = maxHealth;
         closestPlayerWaypoint = Vector3.positiveInfinity;
         closestWaypoint = Vector3.positiveInfinity;
+        //m_Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -174,9 +176,13 @@ public class EnemyController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+        } else 
+        {
+            //m_Rigidbody2D.AddForce(new Vector2(0f, 200f)); how can i apply this knockback effect?
+            healthBar.localScale = new Vector3(0.95f * health / maxHealth,0.6f,1);
+            healthBar.position = new Vector3(healthBar.position.x-(1-(0.95f * health / maxHealth))/2f, healthBar.position.y, healthBar.position.z);
         }
-        isDamaged = true;
-        healthBar.localScale = new Vector3(0.95f * health / maxHealth,0.6f,1);
-        healthBar.position = new Vector3(-(1-(0.95f * health / maxHealth))/2f, 0, 0);
+        isDamaged = true;      
+        
     }
 }

@@ -39,8 +39,11 @@ public class BasicPlayerController : MonoBehaviour
     private float deathTimer;
 
     InputAction moveAction, jumpAction, attackAction;
+    public LayerMask m_EnemyLayer;
 
     bool atHospital = false;
+    bool m_Started;
+    public ParticleSystem attackEffect;
 
     void Awake() 
     {
@@ -60,6 +63,8 @@ public class BasicPlayerController : MonoBehaviour
 
         initialColor = new Color(0.0f, 0.0f, 0.0f, 1.0f);
         finalColor = new Color(0.6f, 0.0f, 0.0f, 1.0f);
+        
+        m_Started = true;
     }
 
     void Update()
@@ -139,25 +144,25 @@ public class BasicPlayerController : MonoBehaviour
 
             horizontalMove = moveAction.ReadValue<Vector2>().x*runSpeed;
         
-            if (jumpAction.IsPressed())
-            {
-                float currentVelo = GetComponent<Rigidbody2D>().velocity.y;
-                
-                if (currentVelo <= 0.1f )
-                {
-                    if (controller.GetGrounded())
-                    {
-                        anim.SetTrigger("takeoff");
-                    }
-                    jump = true;
-                }
-            }
 
             if (attackAction.WasPressedThisFrame()) {
                 if (controller.GetGrounded()) {
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0,GetComponent<Rigidbody2D>().velocity.y);
                     anim.SetTrigger("attack");
                     attack = true;
+                }
+            }
+            else if (jumpAction.IsPressed())
+            {
+                float currentVelo = GetComponent<Rigidbody2D>().velocity.y;
+                
+                if (currentVelo <= 0.1f )
+                {
+                    if (controller.GetGrounded() && !attack)
+                    {
+                        anim.SetTrigger("takeoff");
+                    }
+                    jump = true;
                 }
             }
         }        
@@ -179,6 +184,42 @@ public class BasicPlayerController : MonoBehaviour
     public void AttackEnd()
     {
         attack = false;
+    }
+
+    public void AttackEnemies() {
+        Vector3 boxPosition = GetComponent<Transform>().position;
+        ParticleSystemRenderer attackRenderer = attackEffect.GetComponent<ParticleSystemRenderer>();
+        var vel = attackEffect.velocityOverLifetime;
+        // determines attack offset
+        if (controller.GetFacingRight()) {
+            boxPosition += new Vector3(2f,0f,0f);
+            attackRenderer.pivot = new Vector3(1f,0f,0f);
+            vel.x = new ParticleSystem.MinMaxCurve(10f);
+        } else {
+            boxPosition += new Vector3(-2f,0f,0f);
+            attackRenderer.pivot = new Vector3(-1f,0f,0f);
+            vel.x = new ParticleSystem.MinMaxCurve(-10f);
+        }
+        attackEffect.Play();
+        // determines attack range
+        Collider2D[] enemies = Physics2D.OverlapBoxAll(boxPosition, new Vector3(5f,2f,0f),0f, m_EnemyLayer);
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].gameObject != gameObject)
+            {
+                enemies[i].GetComponent<EnemyController>().takeDamage(5f);
+            }
+        }  
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+        if (m_Started) {
+            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+            Gizmos.DrawWireCube(GetComponent<Transform>().position + new Vector3(2f,1f,0f), new Vector3(5f,2f,0));
+        }
     }
 
     void Die()

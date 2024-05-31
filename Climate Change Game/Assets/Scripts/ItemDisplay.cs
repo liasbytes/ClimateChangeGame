@@ -12,7 +12,6 @@ public class ItemDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public ItemDisplayChild item;
     public ItemDisplayChild unknown;
     private ItemDisplayChild shownItem;
-    private bool mouse_over = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +27,6 @@ public class ItemDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        mouse_over = true;
         string name = shownItem.getName();
         string description = shownItem.getDesc();
         string location = shownItem.getLoc();
@@ -40,8 +38,6 @@ public class ItemDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        mouse_over = false;
-        //Debug.Log("Mouse exit");
         infoTitle.gameObject.SetActive(false);
     }
 }

@@ -14,7 +14,6 @@ public class LockedArea : MonoBehaviour
         {
             Destroy(gameObject);
         } else {
-            Debug.Log("Not too fast! You need '" + key.name + "' to pass.");
             // potentially add dialogue box, etc. here on screen
         }            
     }

@@ -38,13 +38,13 @@ public class ChangeSettings : MonoBehaviour
         }
 
         float volume = 0f;
-        mixer.GetFloat("MasterVol", out volume);
+        volume = PlayerPrefs.GetFloat("MasterVol",0);
         masterSlider.value = Mathf.RoundToInt(volume * 2) + 100;
-        mixer.GetFloat("MusicVol", out volume);
+        volume = PlayerPrefs.GetFloat("MusicVol",0);
         musicSlider.value = Mathf.RoundToInt(volume * 2) + 100;
-        mixer.GetFloat("SFXVol", out volume);
+        volume = PlayerPrefs.GetFloat("SFXVol",0);
         sfxSlider.value = Mathf.RoundToInt(volume * 2) + 100;
-        mixer.GetFloat("AmbientVol", out volume);
+        volume = PlayerPrefs.GetFloat("AmbientVol",0);
         ambientSlider.value = Mathf.RoundToInt(volume * 2) + 100;
 
         masterLabel.text = masterSlider.value.ToString();
